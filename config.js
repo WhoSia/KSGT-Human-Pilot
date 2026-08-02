@@ -1,6 +1,6 @@
 window.KSGT_CONFIG = Object.freeze({
   studyId: "KSGT-H0-PILOT-002",
-  clientVersion: "0.3.23-human-pilot-pages-rc3",
+  clientVersion: "0.3.23-human-pilot-pages-rc3.1",
   consentVersion: "H0-ko-v3",
 
   launchMode: "pilot", // prelaunch | pilot
@@ -14,4 +14,9 @@ window.KSGT_CONFIG = Object.freeze({
   storagePrefix: "ksgt-h0-pilot-002-rc3",
   allowResponseCopyDownload: true,
   requireInvitation: false
+});
+
+// The public pilot no longer shows the internal researcher/prelaunch banner.
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("prelaunchBanner")?.remove();
 });
