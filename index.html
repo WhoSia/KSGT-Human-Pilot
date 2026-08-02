@@ -37,13 +37,72 @@
       <summary>질문이 이 순서로 나오는 이유</summary>
       <p>먼저 자유롭게 느낀 차이를 기록하고, 그 다음에 내용의 유사성과 개인적 선호를 따로 묻습니다. 선택지를 먼저 보여 주어 감상 표현을 유도하는 일을 줄이기 위한 순서입니다.</p>
     </details>
-    <div class="consent-box">
-      <label><input id="ageConfirm" type="checkbox"> 나는 만 <span id="minimumAgeText">18</span>세 이상입니다.</label>
-      <label><input id="consent" type="checkbox"> 설명을 읽었으며 자발적으로 참여합니다. 언제든 중단할 수 있습니다.</label>
-    </div>
+
+    <section class="consent-box" aria-labelledby="consentHeading">
+      <div class="consent-summary-row">
+        <div>
+          <strong id="consentHeading">연구 참여 동의</strong>
+          <p>연구 목적·절차·수집 정보·보관·삭제·연령 및 보호자 동의를 한 문서에서 확인합니다.</p>
+        </div>
+        <button id="openConsent" class="terms-button" type="button" aria-haspopup="dialog">전문 보기</button>
+      </div>
+
+      <fieldset class="eligibility-fieldset">
+        <legend><strong>참여자의 연령 및 동의 방식</strong></legend>
+        <label><input type="radio" name="eligibility" value="adult_self_consent"> 만 18세 이상이며, 내가 직접 참여에 동의합니다.</label>
+        <label><input type="radio" name="eligibility" value="minor_guardian_consent_attested"> 만 18세 미만이며, 보호자와 함께 설명을 읽고 보호자가 참여에 동의했습니다.</label>
+      </fieldset>
+
+      <div id="guardianBlock" class="guardian-block" hidden>
+        <strong>보호자 확인</strong>
+        <p>아래 확인란은 보호자가 직접 읽고 선택해 주세요.</p>
+        <label><input id="guardianConfirm" type="checkbox"> 보호자 본인은 연구 참여 설명을 읽었으며, 미성년 참여자의 참여에 동의합니다.</label>
+        <small>이 페이지는 보호자의 이름이나 서명을 수집하지 않으므로, 이 확인은 전자적 자기확인 기록입니다.</small>
+      </div>
+
+      <label class="consent-check-row">
+        <input id="consent" type="checkbox" disabled>
+        <span>
+          <strong>연구 참여 설명 및 개인정보 처리 내용에 동의합니다.</strong>
+          <small id="consentReadStatus">먼저 ‘전문 보기’를 열고 내용을 확인해 주세요.</small>
+        </span>
+      </label>
+    </section>
+
     <button id="start" disabled>연구 시작</button>
     <p id="startError" class="error" role="alert"></p>
   </section>
+
+  <dialog id="consentDialog" aria-labelledby="consentDialogTitle">
+    <div class="consent-dialog-shell">
+      <header class="dialog-header">
+        <div><p class="eyebrow">연구 참여 설명서</p><h2 id="consentDialogTitle">KSGT 읽기 경험 파일럿</h2></div>
+        <button id="closeConsent" type="button" class="icon-button" aria-label="동의문 닫기">×</button>
+      </header>
+      <div id="consentScroll" class="consent-scroll" tabindex="0">
+        <p class="consent-version">동의문 버전: <strong id="consentVersionText"></strong></p>
+        <section><h3>1. 연구 목적</h3><p>이 연구는 비슷한 내용을 전하는 두 한국어 문장이 독자에게 어떻게 다르게 읽히는지 살펴봅니다. 정답을 맞히는 시험이 아니며, 참여자의 자연스러운 감상과 선택을 기록합니다.</p></section>
+        <section><h3>2. 참여 절차와 시간</h3><p>두 글을 읽고 각 글의 인상, 두 글의 차이, 내용의 유사성, 개인적 선호를 답합니다. 전체 예상 시간은 약 8~12분이며, 작성 중 중단하거나 브라우저를 닫을 수 있습니다.</p></section>
+        <section><h3>3. 자발적 참여와 중단</h3><p>참여는 자발적입니다. 참여하지 않거나 중간에 그만두어도 불이익이 없습니다. 제출 전에는 페이지를 닫거나 기기의 임시 저장을 초기화할 수 있고, 제출 후에는 제공되는 삭제 기능으로 서버 저장본 삭제를 요청할 수 있습니다.</p></section>
+        <section><h3>4. 예상되는 불편과 이득</h3><p>일부 문항에서 피로, 집중 부담, 표현의 어려움이 생길 수 있습니다. 불편하면 언제든 중단할 수 있습니다. 참여자에게 직접적인 보상이나 확정적인 이득은 없으며, 결과는 한국어 표현과 독자 반응을 이해하기 위한 연구에 사용됩니다.</p></section>
+        <section><h3>5. 수집하는 정보</h3><ul><li>각 글에 대한 자유응답, 비교 설명, 내용 유사성 및 선호 선택</li><li>문항 제시 순서와 응답 시각</li><li>붙여넣기 횟수·붙여넣은 문자 수·입력 이벤트 수. 클립보드 원문은 수집하지 않습니다.</li><li>브라우저 종류를 나타내는 user agent, 화면 크기, 언어, 시간대</li><li>생성형 AI 또는 교정 도구 사용 여부에 대한 선택적 자기보고</li><li>성인 직접 동의 또는 미성년자 보호자 동의 확인 중 어느 방식으로 참여했는지</li></ul></section>
+        <section><h3>6. 수집하지 않는 정보</h3><p>이름, 이메일 주소, 전화번호, 학교명, 주민등록번호, 보호자 이름과 서명, 클립보드 원문은 요구하지 않습니다. 다만 인터넷 서비스 운영 과정에서 GitHub Pages 또는 Google Apps Script 제공자가 일반적인 접속 로그를 처리할 수 있습니다.</p></section>
+        <section><h3>7. 연령과 보호자 동의</h3><p>만 18세 이상 참여자는 스스로 동의할 수 있습니다. 만 18세 미만 참여자는 본인의 참여 의사와 함께 보호자의 동의가 필요합니다. 미성년자는 보호자와 이 설명을 함께 읽고, 보호자가 페이지의 보호자 확인란을 직접 선택한 경우에만 시작해 주세요.</p></section>
+        <section><h3>8. 보관과 이용</h3><p>원문 응답은 파일럿 종료 후 최대 90일 동안 검증과 분석을 위해 보관하고, 이후 삭제하거나 직접 식별정보가 없는 분석 자료로 전환합니다. 연구 결과에는 집계값을 사용하며, 자유응답을 예시로 제시할 때에는 개인을 유추할 수 있는 표현을 제거합니다.</p></section>
+        <section><h3>9. 삭제와 철회</h3><p>제출 후 표시되는 삭제 요청 버튼을 사용하면 해당 서버 저장본의 원문 payload가 삭제 처리됩니다. 이미 익명 집계에 포함되어 개별 응답과 연결할 수 없게 된 결과는 철회 이후에도 되돌리기 어려울 수 있습니다.</p></section>
+        <section><h3>10. 자료 구획과 AI 자료 분리</h3><p>실제 참여자 응답은 인간 자료 구획에 저장됩니다. Gemini·Groq 등 언어 모델로 생성한 합성 응답과 물리적으로·분석적으로 분리하며, 합성 응답을 인간 응답으로 표시하지 않습니다.</p></section>
+        <section><h3>11. 문의</h3><p>연구 또는 삭제에 관한 문의는 설문 링크를 전달한 연구자에게 해 주세요.</p></section>
+        <div class="scroll-end" aria-hidden="true">동의문 끝</div>
+      </div>
+      <footer class="dialog-footer">
+        <p id="scrollHint">내용을 끝까지 내려 읽으면 확인 버튼이 활성화됩니다.</p>
+        <div class="actions">
+          <button id="acknowledgeConsent" type="button" disabled>내용을 확인했습니다</button>
+          <button id="cancelConsent" type="button" class="secondary">닫기</button>
+        </div>
+      </footer>
+    </div>
+  </dialog>
 
   <section id="resumePanel" class="panel" hidden>
     <p class="eyebrow">작성 중인 응답 발견</p>
@@ -56,82 +115,42 @@
       <div class="progress-row"><span id="progressText">문항 준비 중</span><span id="progressCount"></span></div>
       <progress id="progressBar" value="0" max="1"></progress>
     </div>
-
     <section class="panel">
       <p class="eyebrow">1단계 · 각각의 인상</p>
       <h2>두 글을 각각 읽어 보세요.</h2>
       <p class="hint">두 글은 같은 화면에 있지만, 먼저 각 글에서 따로 느낀 점을 적어 주세요.</p>
       <div class="grid">
-        <article>
-          <h3>글 1</h3><p id="leftText" class="stimulus"></p>
-          <label for="leftImpression">글 1을 읽고 든 생각이나 느낌</label>
-          <textarea id="leftImpression" rows="5" maxlength="1200" placeholder="장면, 분위기, 말의 흐름, 감정 등 무엇이든 자유롭게 적어 주세요."></textarea>
-          <small class="counter"><span id="leftCount">0</span>/1200</small>
-        </article>
-        <article>
-          <h3>글 2</h3><p id="rightText" class="stimulus"></p>
-          <label for="rightImpression">글 2를 읽고 든 생각이나 느낌</label>
-          <textarea id="rightImpression" rows="5" maxlength="1200" placeholder="문학 용어를 쓰지 않아도 됩니다."></textarea>
-          <small class="counter"><span id="rightCount">0</span>/1200</small>
-        </article>
+        <article><h3>글 1</h3><p id="leftText" class="stimulus"></p><label for="leftImpression">글 1을 읽고 든 생각이나 느낌</label><textarea id="leftImpression" rows="5" maxlength="1200" placeholder="장면, 분위기, 말의 흐름, 감정 등 무엇이든 자유롭게 적어 주세요."></textarea><small class="counter"><span id="leftCount">0</span>/1200</small></article>
+        <article><h3>글 2</h3><p id="rightText" class="stimulus"></p><label for="rightImpression">글 2를 읽고 든 생각이나 느낌</label><textarea id="rightImpression" rows="5" maxlength="1200" placeholder="문학 용어를 쓰지 않아도 됩니다."></textarea><small class="counter"><span id="rightCount">0</span>/1200</small></article>
       </div>
     </section>
-
     <section class="panel">
       <p class="eyebrow">2단계 · 자유로운 비교</p>
       <label for="comparison"><h2>두 글 사이에서 무엇이 달랐나요?</h2></label>
       <p class="hint">좋고 나쁨을 꼭 정하지 않아도 됩니다. 읽히는 방식이나 남는 느낌의 차이만 적어도 됩니다.</p>
       <textarea id="comparison" rows="6" maxlength="1600" placeholder="예: 한쪽은 장면이 오래 남고, 다른 쪽은 상황이 더 또렷하게 전달되었다."></textarea>
       <small class="counter"><span id="comparisonCount">0</span>/1600</small>
-      <button id="toChoice">마지막 질문으로</button>
-      <p id="choiceError" class="error" role="alert"></p>
+      <button id="toChoice">마지막 질문으로</button><p id="choiceError" class="error" role="alert"></p>
     </section>
-
     <section id="choicePanel" class="panel" hidden>
       <p class="eyebrow">3단계 · 두 가지를 따로 선택</p>
-      <fieldset>
-        <legend><strong>두 글이 전하는 내용은 어느 정도 비슷했나요?</strong></legend>
-        <label><input type="radio" name="meaningRelation" value="nearly_same"> 거의 같은 내용을 전한다</label>
-        <label><input type="radio" name="meaningRelation" value="similar_content_different_feel"> 내용은 비슷하지만 느낌은 다르다</label>
-        <label><input type="radio" name="meaningRelation" value="meaningfully_different"> 내용이나 장면도 꽤 다르다</label>
-        <label><input type="radio" name="meaningRelation" value="difficult"> 판단하기 어렵다</label>
-      </fieldset>
-      <fieldset>
-        <legend><strong>개인적으로 지금 더 마음이 가는 쪽은 어디인가요?</strong></legend>
-        <label><input type="radio" name="preference" value="left"> 글 1</label>
-        <label><input type="radio" name="preference" value="right"> 글 2</label>
-        <label><input type="radio" name="preference" value="similar"> 두 글이 비슷하게 마음에 든다</label>
-        <label><input type="radio" name="preference" value="difficult"> 차이는 있지만 고르기 어렵다</label>
-        <label><input type="radio" name="preference" value="no_choice"> 선택하지 않겠다</label>
-      </fieldset>
+      <fieldset><legend><strong>두 글이 전하는 내용은 어느 정도 비슷했나요?</strong></legend><label><input type="radio" name="meaningRelation" value="nearly_same"> 거의 같은 내용을 전한다</label><label><input type="radio" name="meaningRelation" value="similar_content_different_feel"> 내용은 비슷하지만 느낌은 다르다</label><label><input type="radio" name="meaningRelation" value="meaningfully_different"> 내용이나 장면도 꽤 다르다</label><label><input type="radio" name="meaningRelation" value="difficult"> 판단하기 어렵다</label></fieldset>
+      <fieldset><legend><strong>개인적으로 지금 더 마음이 가는 쪽은 어디인가요?</strong></legend><label><input type="radio" name="preference" value="left"> 글 1</label><label><input type="radio" name="preference" value="right"> 글 2</label><label><input type="radio" name="preference" value="similar"> 두 글이 비슷하게 마음에 든다</label><label><input type="radio" name="preference" value="difficult"> 차이는 있지만 고르기 어렵다</label><label><input type="radio" name="preference" value="no_choice"> 선택하지 않겠다</label></fieldset>
       <div class="actions"><button id="backToText" class="secondary">감상으로 돌아가기</button><button id="nextItem" disabled>다음 문항</button></div>
     </section>
   </section>
 
   <section id="toolReport" class="panel" hidden>
-    <p class="eyebrow">마지막 질문 · 작성 방식</p>
-    <h1>응답을 작성할 때 외부 도구의 도움을 받았나요?</h1>
-    <p>어떤 답을 골라도 불이익은 없습니다. 이 정보는 응답을 삭제하기 위한 기준이 아니라 분석의 불확실성을 기록하는 데만 사용됩니다.</p>
-    <fieldset class="stack">
-      <label><input type="radio" name="aiUse" value="none"> 사용하지 않음</label>
-      <label><input type="radio" name="aiUse" value="proofreading"> 맞춤법·표현 교정만 사용</label>
-      <label><input type="radio" name="aiUse" value="partial_generation"> 생성형 AI의 일부 도움을 받음</label>
-      <label><input type="radio" name="aiUse" value="mostly_generated"> 대부분 생성형 AI로 작성</label>
-      <label><input type="radio" name="aiUse" value="prefer_not"> 답하고 싶지 않음</label>
-    </fieldset>
-    <button id="submitAll" disabled>전체 응답 제출</button>
-    <p id="submitError" class="error" role="alert"></p>
+    <p class="eyebrow">마지막 질문 · 작성 방식</p><h1>응답을 작성할 때 외부 도구의 도움을 받았나요?</h1><p>어떤 답을 골라도 불이익은 없습니다. 이 정보는 응답을 삭제하기 위한 기준이 아니라 분석의 불확실성을 기록하는 데만 사용됩니다.</p>
+    <fieldset class="stack"><label><input type="radio" name="aiUse" value="none"> 사용하지 않음</label><label><input type="radio" name="aiUse" value="proofreading"> 맞춤법·표현 교정만 사용</label><label><input type="radio" name="aiUse" value="partial_generation"> 생성형 AI의 일부 도움을 받음</label><label><input type="radio" name="aiUse" value="mostly_generated"> 대부분 생성형 AI로 작성</label><label><input type="radio" name="aiUse" value="prefer_not"> 답하고 싶지 않음</label></fieldset>
+    <button id="submitAll" disabled>전체 응답 제출</button><p id="submitError" class="error" role="alert"></p>
   </section>
 
   <section id="done" class="panel" hidden>
-    <p class="eyebrow">제출 완료</p>
-    <h1>응답이 접수되었습니다.</h1>
-    <p id="receipt"></p>
-    <p>영수증 번호는 삭제 요청이나 문의 시 사용할 수 있습니다.</p>
-    <div class="actions"><button id="download">내 응답 사본 내려받기</button><button id="deleteButton" class="danger">서버 저장본 삭제 요청</button></div>
-    <p id="deleteStatus" role="status"></p>
+    <p class="eyebrow">제출 완료</p><h1>응답이 접수되었습니다.</h1><p id="receipt"></p><p>영수증 번호는 삭제 요청이나 문의 시 사용할 수 있습니다.</p><div class="actions"><button id="download">내 응답 사본 내려받기</button><button id="deleteButton" class="danger">서버 저장본 삭제 요청</button></div><p id="deleteStatus" role="status"></p>
   </section>
 </main>
 <footer>연구 문의: <span id="contactText"></span> · <button id="resetLocal" class="link-button">이 기기의 임시 저장 초기화</button></footer>
 <script src="config.js"></script><script src="assets/app.js" defer></script>
-</body></html>
+</body>
+</html>
