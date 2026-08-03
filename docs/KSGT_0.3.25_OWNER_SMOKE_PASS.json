@@ -1,0 +1,31 @@
+{
+  "schema_version": "ksgt.owner-smoke-certificate.v1",
+  "study_phase": "KSGT-0.3.25",
+  "study_id": "KSGT-H0-PILOT-002",
+  "client_version": "0.3.25-human-linked-s0-pages-rc1.2",
+  "collector_version": "0.3.25-human-pilot-collector-delete-receipt-recovery-r2",
+  "assignment_protocol_version": "KSGT-0.3.25-STRATIFIED-3-BLOCK-1",
+  "owner_smoke_completed_at": "2026-08-03T15:34:00+09:00",
+  "evidence_source": "owner-reported browser output",
+  "checks": {
+    "scheduled_link_opened": true,
+    "three_items_rendered": true,
+    "submission_accepted": true,
+    "receipt_displayed": true,
+    "delete_request_succeeded": true,
+    "deletion_receipt_displayed": true,
+    "local_receipt_values_stored_in_certificate": false
+  },
+  "release_decision": "PASS-EXTERNAL-HUMAN-INTAKE-OPEN",
+  "constraints": {
+    "scheduled_links_only": true,
+    "one_completed_participant_per_slot": true,
+    "synthetic_and_human_partitions_separate": true,
+    "target_complete_participants": 24,
+    "target_responses": 72
+  },
+  "github_commits": {
+    "receipt_recovery_bridge": "11a77f9b8387620c4708c2a285d5d73e95e4ca57",
+    "client_promotion": "df69d6428d2f098bc42f24dc8a0db5979fd2ca59"
+  }
+}
