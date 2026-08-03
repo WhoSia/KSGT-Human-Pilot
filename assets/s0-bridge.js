@@ -74,4 +74,48 @@ window.fetch=async function(input,init){
 };
 
 window.KSGT_S0_RUNTIME={getMeta:()=>meta?{...meta,bank_sha256:bankSha256}:null,getSelection:()=>selected.map(x=>({...x}))};
+
+const postCollector=async body=>{
+  const r=await nativeFetch(C.collectorUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body),redirect:"follow"});
+  let d;
+  try{d=await r.json()}catch{throw new Error("수집 서버가 JSON으로 응답하지 않았습니다.")}
+  if(!r.ok||d.ok===false)throw new Error(d.error||`request_failed_${r.status}`);
+  return d;
+};
+
+const installDeleteRecovery=()=>{
+  const button=document.getElementById("deleteButton");
+  const status=document.getElementById("deleteStatus");
+  if(!button||!status)return;
+  button.onclick=async()=>{
+    const storageKey=`${C.storagePrefix||"ksgt"}:state`;
+    const payloadKey=`${C.storagePrefix||"ksgt"}:last-payload`;
+    try{
+      const state=JSON.parse(localStorage.getItem(storageKey)||"{}");
+      if(!state.receipt?.response_id||!state.deletionProof)throw new Error("delete_state_missing");
+      const deleteWith=proof=>postCollector({action:"delete",study_id:C.studyId,response_id:state.receipt.response_id,deletion_proof:proof});
+      let result;
+      try{
+        result=await deleteWith(state.deletionProof);
+      }catch(e){
+        if(e.message!=="delete_authorization_failed")throw e;
+        const payload=JSON.parse(localStorage.getItem(payloadKey)||"null");
+        if(!payload)throw new Error("delete_recovery_payload_missing");
+        const replay=await postCollector({action:"submit",payload});
+        if(!replay?.receipt||replay.receipt.response_id!==state.receipt.response_id||replay.receipt.receipt_hash!==state.receipt.receipt_hash)throw new Error("delete_recovery_receipt_mismatch");
+        state.receipt=replay.receipt;
+        state.deletionProof=replay.receipt.deletion_proof;
+        localStorage.setItem(storageKey,JSON.stringify(state));
+        result=await deleteWith(state.deletionProof);
+      }
+      state.deleted=true;
+      localStorage.setItem(storageKey,JSON.stringify(state));
+      status.textContent=`삭제 완료 · ${result.deletion_receipt}`;
+    }catch(e){
+      status.textContent=`삭제하지 못했습니다: ${e.message}`;
+    }
+  };
+};
+
+document.addEventListener("DOMContentLoaded",installDeleteRecovery);
 })();
