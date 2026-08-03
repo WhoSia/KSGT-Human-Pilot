@@ -44,6 +44,7 @@ Storage.prototype.setItem=function(key,value){
 window.fetch=async function(input,init){
   const url=new URL(typeof input==="string"?input:input.url,location.href).href;
   if(url===bankUrl){
+    if(C.requireScheduledAssignment&&!scheduled)throw new Error("연구자에게 받은 전용 링크로 접속해 주세요.");
     const response=await nativeFetch(input,init);
     if(!response.ok)return response;
     const raw=await response.text();
