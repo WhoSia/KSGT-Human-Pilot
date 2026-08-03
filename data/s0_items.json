@@ -1,0 +1,185 @@
+{
+  "schema_version": "ksgt.s0-human-bank.v1",
+  "bank_id": "KSGT-S0-HUMAN-BANK-001",
+  "study_phase": "KSGT-0.3.25",
+  "source_synthetic_study": "KSGT-0.3.23-S0-WSL-RAVEL",
+  "source_response_set_sha256": "a4ba98184ebadbb14d1d5f10132f9b5cc5ad0293b4d1874af3ba275da8664f5f",
+  "assignment_protocol": {
+    "version": "KSGT-0.3.25-STRATIFIED-3-BLOCK-1",
+    "assignment_count": 3,
+    "cohort_cycle": 12,
+    "strata_order": [
+      "orientation_instability",
+      "cross_model_disagreement",
+      "stable_control"
+    ],
+    "orientation_blocks": {
+      "0": {
+        "orientation_instability": "AB",
+        "cross_model_disagreement": "BA",
+        "stable_control": "AB"
+      },
+      "1": {
+        "orientation_instability": "BA",
+        "cross_model_disagreement": "AB",
+        "stable_control": "BA"
+      }
+    },
+    "reserve_items": [
+      "S0-010",
+      "S0-015"
+    ]
+  },
+  "items": [
+    {
+      "item_id": "S0-001",
+      "variant_a_text": "복도 끝의 빛은 문이 닫힌 뒤에도 한동안 자리를 떠나지 않았다.",
+      "variant_b_text": "문이 닫혔다. 복도 끝에는 빛이 한동안 남아 있었다.",
+      "question": "두 글 사이에서 무엇이 달랐나요?",
+      "constructs": ["agency_metaphor", "residual_afterimage"],
+      "assignment_stratum": "orientation_instability",
+      "priority_rank": 1,
+      "active": true
+    },
+    {
+      "item_id": "S0-002",
+      "variant_a_text": "세탁기는 멈췄지만 물의 얼굴은 유리문 안에서 조금 더 돌았다.",
+      "variant_b_text": "세탁기가 멈춘 뒤에도 유리문 안의 물은 잠시 회전했다.",
+      "question": "두 글의 장면과 인상이 어떻게 달랐나요?",
+      "constructs": ["personification", "image_persistence"],
+      "assignment_stratum": "orientation_instability",
+      "priority_rank": 2,
+      "active": true
+    },
+    {
+      "item_id": "S0-003",
+      "variant_a_text": "그의 대답은 계단 하나를 남겨 둔 채 끝났다.",
+      "variant_b_text": "그는 마지막 설명을 하지 않고 대답을 끝냈다.",
+      "question": "두 문장이 남기는 여지는 어떻게 다른가요?",
+      "constructs": ["implicit_gap", "explanation_pressure"],
+      "assignment_stratum": "stable_control",
+      "priority_rank": 9,
+      "active": true
+    },
+    {
+      "item_id": "S0-004",
+      "variant_a_text": "비가 창문을 두드릴 때마다 방 안의 침묵이 한 칸씩 좁아졌다.",
+      "variant_b_text": "빗소리가 커질수록 방 안은 덜 조용하게 느껴졌다.",
+      "question": "두 글의 감각과 진행 방식은 어떻게 다른가요?",
+      "constructs": ["embodied_space", "sensory_progression"],
+      "assignment_stratum": "stable_control",
+      "priority_rank": 10,
+      "active": true
+    },
+    {
+      "item_id": "S0-005",
+      "variant_a_text": "그녀가 웃자 문장 속의 겨울이 잠깐 얇아졌다.",
+      "variant_b_text": "그녀가 웃자 차갑던 분위기가 잠시 누그러졌다.",
+      "question": "두 표현의 정서 전달 방식은 어떻게 다른가요?",
+      "constructs": ["affective_temperature", "stylistic_flattening"],
+      "assignment_stratum": "stable_control",
+      "priority_rank": 11,
+      "active": true
+    },
+    {
+      "item_id": "S0-006",
+      "variant_a_text": "나는 그가 돌아올 거라고 생각했다. 아니, 그렇게 생각한 사람은 나였을까.",
+      "variant_b_text": "나는 그가 돌아올 거라고 생각했지만, 그 생각의 주체는 분명하지 않았다.",
+      "question": "두 글의 관점과 모호성은 어떻게 다른가요?",
+      "constructs": ["perspective_instability", "explicitness"],
+      "assignment_stratum": "orientation_instability",
+      "priority_rank": 6,
+      "active": true
+    },
+    {
+      "item_id": "S0-007",
+      "variant_a_text": "종이컵 가장자리에서 오후가 천천히 식었다.",
+      "variant_b_text": "오후가 지나며 종이컵의 커피가 천천히 식었다.",
+      "question": "두 문장의 시간감과 이미지가 어떻게 다른가요?",
+      "constructs": ["time_metaphor", "literalization"],
+      "assignment_stratum": "cross_model_disagreement",
+      "priority_rank": 3,
+      "active": true
+    },
+    {
+      "item_id": "S0-008",
+      "variant_a_text": "그 말은 방 안에 놓이자마자 누구의 것도 아닌 것이 되었다.",
+      "variant_b_text": "그가 한 말은 방 안의 사람들 모두에게 다르게 받아들여졌다.",
+      "question": "두 글의 의미 소유와 해석 가능성은 어떻게 다른가요?",
+      "constructs": ["ownership_dissolution", "distributed_interpretation"],
+      "assignment_stratum": "cross_model_disagreement",
+      "priority_rank": 4,
+      "active": true
+    },
+    {
+      "item_id": "S0-009",
+      "variant_a_text": "전등은 꺼졌고, 어둠은 그제야 제 자리를 찾았다.",
+      "variant_b_text": "전등이 꺼지자 방 안이 어두워졌다.",
+      "question": "두 문장이 사건을 조직하는 방식은 어떻게 다른가요?",
+      "constructs": ["state_transition", "personification"],
+      "assignment_stratum": "stable_control",
+      "priority_rank": 12,
+      "active": true
+    },
+    {
+      "item_id": "S0-010",
+      "variant_a_text": "그녀의 침묵은 대답보다 늦게 도착했지만 더 오래 남았다.",
+      "variant_b_text": "그녀는 늦게까지 대답하지 않았고 그 인상이 오래 남았다.",
+      "question": "두 글의 시간 구조와 잔상이 어떻게 다른가요?",
+      "constructs": ["temporal_reversal", "silence_as_event"],
+      "assignment_stratum": "reserve",
+      "priority_rank": 14,
+      "active": false
+    },
+    {
+      "item_id": "S0-011",
+      "variant_a_text": "문장의 숨이 쉼표마다 한 번씩 발을 헛디뎠다.",
+      "variant_b_text": "쉼표가 많아 문장의 흐름이 자주 끊겼다.",
+      "question": "두 글의 리듬 비평 방식은 어떻게 다른가요?",
+      "constructs": ["embodied_rhythm", "critical_metaphor"],
+      "assignment_stratum": "stable_control",
+      "priority_rank": 13,
+      "active": true
+    },
+    {
+      "item_id": "S0-012",
+      "variant_a_text": "창밖의 나무는 바람에 흔들린 것이 아니라 잠시 다른 생각을 한 것처럼 보였다.",
+      "variant_b_text": "창밖의 나무가 바람에 흔들리는 모습은 생각에 잠긴 것처럼 보였다.",
+      "question": "두 글의 비유 범위와 장면성은 어떻게 다른가요?",
+      "constructs": ["simile_scope", "agency_attribution"],
+      "assignment_stratum": "orientation_instability",
+      "priority_rank": 5,
+      "active": true
+    },
+    {
+      "item_id": "S0-013",
+      "variant_a_text": "그가 떠난 뒤 의자는 비어 있었고, 비어 있다는 사실만은 자꾸 커졌다.",
+      "variant_b_text": "그가 떠난 뒤 빈 의자가 점점 더 눈에 띄었다.",
+      "question": "두 문장의 결핍 표현은 어떻게 다른가요?",
+      "constructs": ["absence_growth", "attention_shift"],
+      "assignment_stratum": "cross_model_disagreement",
+      "priority_rank": 7,
+      "active": true
+    },
+    {
+      "item_id": "S0-014",
+      "variant_a_text": "해석이 먼저 방에 들어와 물건들의 자리를 정해 버렸다.",
+      "variant_b_text": "설명이 너무 일찍 제시되어 장면을 자유롭게 해석하기 어려웠다.",
+      "question": "두 글의 비평 표현과 설명 정도는 어떻게 다른가요?",
+      "constructs": ["critical_metaphor", "explanation_pressure"],
+      "assignment_stratum": "stable_control",
+      "priority_rank": 15,
+      "active": true
+    },
+    {
+      "item_id": "S0-015",
+      "variant_a_text": "바라보는 자리가 문장마다 다른 어깨로 옮겨 갔다.",
+      "variant_b_text": "문장마다 관점의 주체가 달라져 시점이 불안정했다.",
+      "question": "두 글의 관점 비평 방식은 어떻게 다른가요?",
+      "constructs": ["embodied_perspective", "critical_metaphor"],
+      "assignment_stratum": "reserve",
+      "priority_rank": 8,
+      "active": false
+    }
+  ]
+}
