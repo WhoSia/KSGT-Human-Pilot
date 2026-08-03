@@ -51,7 +51,8 @@ window.fetch=async function(input,init){
     Assignment.validateBank(bank);
     bankSha256=await sha256(raw);
     const result=Assignment.assign(bank,{seed:forcedSeed,block,cohort,slot});
-    selected=result.assignment.map(x=>{
+    selected=bank.assignment_protocol.strata_order.map(stratum=>{
+      const x=result.assignment.find(y=>y.assignment_stratum===stratum);
       const item=bank.items.find(y=>y.item_id===x.item_id);
       return {item_id:item.item_id,variant_a_text:item.variant_a_text,variant_b_text:item.variant_b_text};
     });
