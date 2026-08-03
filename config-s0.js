@@ -1,7 +1,7 @@
 window.KSGT_CONFIG = Object.freeze({
   studyId: "KSGT-H0-PILOT-002",
   studyPhase: "KSGT-0.3.25",
-  clientVersion: "0.3.25-human-linked-s0-pages-rc1",
+  clientVersion: "0.3.25-human-linked-s0-pages-rc1.1",
   consentVersion: "H0-ko-v3",
 
   launchMode: "pilot",
@@ -16,7 +16,7 @@ window.KSGT_CONFIG = Object.freeze({
   storagePrefix: "ksgt-0325-human-linked-s0-rc1",
   allowResponseCopyDownload: true,
   requireInvitation: false,
-  requireScheduledAssignment: false
+  requireScheduledAssignment: true
 });
 
 document.addEventListener("DOMContentLoaded", () => {
