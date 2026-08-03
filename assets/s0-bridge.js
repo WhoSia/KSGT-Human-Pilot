@@ -89,24 +89,18 @@ const installDeleteRecovery=()=>{
   if(!button||!status)return;
   button.onclick=async()=>{
     const storageKey=`${C.storagePrefix||"ksgt"}:state`;
-    const payloadKey=`${C.storagePrefix||"ksgt"}:last-payload`;
     try{
       const state=JSON.parse(localStorage.getItem(storageKey)||"{}");
-      if(!state.receipt?.response_id||!state.deletionProof)throw new Error("delete_state_missing");
-      const deleteWith=proof=>postCollector({action:"delete",study_id:C.studyId,response_id:state.receipt.response_id,deletion_proof:proof});
+      const responseId=state.receipt?.response_id;
+      const receiptHash=state.receipt?.receipt_hash;
+      if(!responseId||!receiptHash)throw new Error("delete_state_missing");
       let result;
       try{
-        result=await deleteWith(state.deletionProof);
+        if(!state.deletionProof)throw new Error("delete_authorization_failed");
+        result=await postCollector({action:"delete",study_id:C.studyId,response_id:responseId,deletion_proof:state.deletionProof});
       }catch(e){
         if(e.message!=="delete_authorization_failed")throw e;
-        const payload=JSON.parse(localStorage.getItem(payloadKey)||"null");
-        if(!payload)throw new Error("delete_recovery_payload_missing");
-        const replay=await postCollector({action:"submit",payload});
-        if(!replay?.receipt||replay.receipt.response_id!==state.receipt.response_id||replay.receipt.receipt_hash!==state.receipt.receipt_hash)throw new Error("delete_recovery_receipt_mismatch");
-        state.receipt=replay.receipt;
-        state.deletionProof=replay.receipt.deletion_proof;
-        localStorage.setItem(storageKey,JSON.stringify(state));
-        result=await deleteWith(state.deletionProof);
+        result=await postCollector({action:"delete_receipt_recovery",study_id:C.studyId,response_id:responseId,receipt_hash:receiptHash});
       }
       state.deleted=true;
       localStorage.setItem(storageKey,JSON.stringify(state));
